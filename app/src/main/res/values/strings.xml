@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">m e m o</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+
+
+    <string-array name="list">
+        <item>文字色</item>
+    <item>黒</item>
+    <item>赤</item>
+    <item>青</item>
+    <item>緑</item>
+    <item>白</item>
+</string-array>
+
+    <string-array name="list2">
+        <item>背景</item>
+        <item>白</item>
+        <item>黒</item>
+        <item>赤</item>
+        <item>青</item>
+        <item>緑</item>
+    </string-array>
+
+
+</resources>

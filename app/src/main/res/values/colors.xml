@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="backblue">#BBFFFF</color>
+    <color name="colorPrimaryDark">#00ECFF</color>
+    <color name="backyellow">#FFFF99</color>
+    <color name="coloryellowtitlebar">#FFF69B</color>
+    <color name="backpink">#FFD2EF</color>
+    <color name="colorpinkbar">#FFBBFF</color>
+    <color name="backgreen">#AEFFBD</color>
+    <color name="colorgreenbar">#8FFF7B</color>
+    <color name="backwhite">#EEEEEE</color>
+    <color name="colorwhitebar">#FFFFFF</color>
+    <color name="backblack">#777777</color>
+    <color name="colorblackbar">#555555</color>
+</resources>
