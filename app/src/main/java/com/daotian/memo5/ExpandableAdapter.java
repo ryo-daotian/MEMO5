@@ -1,10 +1,14 @@
 package com.daotian.memo5;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -17,6 +21,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> groups;
     private List<List<String>> colors;
+    private int temporaryColorInt;
 
     public ExpandableAdapter(Context context,List<String> groups,List<List<String>> colors ) {
         this.context = context;
@@ -35,6 +40,8 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
     }
 
 
+
+
     @Override
     public long getChildId(int groupPosition, int childPosition) {
         return 0;
@@ -50,13 +57,15 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_group_child, null);
         }
 
-        TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
+        final TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.child_imageview);
+
 
         imageView.setImageBitmap(getChildImage(groupPosition,childPosition));
         txtListChild.setTextColor(Color.parseColor("#E6D8B3"));
         txtListChild.setTypeface(null, Typeface.ITALIC);
         txtListChild.setText((CharSequence)getChild(groupPosition,childPosition));
+
 
         return convertView;
     }
@@ -108,4 +117,11 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
 }
+

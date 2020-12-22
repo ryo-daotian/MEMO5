@@ -215,6 +215,10 @@ public class fragmemo3 extends Fragment implements TextWatcher {
         }finally {
             db.close();
         }
+
+
+        getActivity().getFragmentManager().invalidateOptionsMenu();
+
     }
         }
 

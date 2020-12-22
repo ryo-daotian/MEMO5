@@ -1,5 +1,6 @@
 package com.daotian.memo5;
 
+import android.text.TextWatcher;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -7,10 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.List;
 
-public class FragmentAdapter extends FragmentStatePagerAdapter {
+public class FragmentAdapter extends FragmentStatePagerAdapter  {
     private Fragment fragment;
     public static int position;
 
@@ -71,4 +73,6 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
     public void finishUpdate(@NonNull ViewGroup container) {
         super.finishUpdate(container);
     }
+
+
 }

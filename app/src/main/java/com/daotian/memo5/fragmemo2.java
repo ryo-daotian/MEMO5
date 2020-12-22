@@ -208,6 +208,9 @@ public class fragmemo2 extends Fragment implements TextWatcher {
             db.close();
         }
 
+        getActivity().getFragmentManager().invalidateOptionsMenu();
+
+
     }
 
     }

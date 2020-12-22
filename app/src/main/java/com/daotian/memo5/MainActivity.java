@@ -6,9 +6,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -40,13 +45,23 @@ public class MainActivity extends AppCompatActivity {
     private List<String> groups;
     private List<List<String>> colors;
     ViewPager viewPager;
-    
+    private dataFragment dataFragment;
+    private FragmentManager fragmentManager;
+    private MenuItem title1;
+
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+        fragmentManager = getSupportFragmentManager();
+        //Navigationviewのリスト
         groups=new ArrayList<String>();
         groups.add("backcolor");
         groups.add("fontcolor");
@@ -102,9 +117,51 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
        getMenuInflater().inflate(R.menu.menu, menu);
+        title1 =menu.findItem(R.id.optiontitle1);
+        MenuItem title2 =menu.findItem(R.id.optiontitle2);
+        MenuItem title3 =menu.findItem(R.id.optiontitle3);
+        MenuItem title4 =menu.findItem(R.id.optiontitle4);
+        MenuItem title5 =menu.findItem(R.id.optiontitle5);
+
+
+        if(dataFragment==null){
+            dataFragment = new dataFragment(this);
+        }
+        SQLiteDatabase db = dataFragment.getWritableDatabase();
+        String optiontitle[] = new String[5];
+        int i=0;
+    try{
+            //Cursor c = db.rawQuery("select title from frag_TABLE where position = '"+ 0 +"'", null);
+            Cursor c = db.rawQuery("select title from frag_TABLE order by Id", null);
+            boolean next = c.moveToFirst();
+            while (next) {
+                optiontitle[i]=c.getString(0);
+                next = c.moveToNext();
+                i++;
+            }
+        }finally {
+            db.close();
+        }
+        title1.setTitle(optiontitle[0]);
+        title2.setTitle(optiontitle[1]);
+        title3.setTitle(optiontitle[2]);
+        title4.setTitle(optiontitle[3]);
+        title5.setTitle(optiontitle[4]);
+
+
+
+
+    //title1.setTitle("dofja");
+
+
+
         return true;
     }
 
@@ -184,6 +241,22 @@ public class MainActivity extends AppCompatActivity {
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
                 break;
+
+            case R.id.optiontitle1:
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.optiontitle2:
+                viewPager.setCurrentItem(1);
+                break;
+            case R.id.optiontitle3:
+                viewPager.setCurrentItem(2);
+                break;
+            case R.id.optiontitle4:
+                viewPager.setCurrentItem(3);
+                break;
+            case R.id.optiontitle5:
+                viewPager.setCurrentItem(4);
+                break;
         }
         return false;
     }
@@ -191,14 +264,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void prepareMenuData() {
-       childImages[0]= new Bitmap[3];
-       childImages[0][0]=BitmapFactory.decodeResource(getResources(),R.drawable.white);
-        childImages[0][2]=BitmapFactory.decodeResource(getResources(),R.drawable.yellow);
+        childImages[0] = new Bitmap[3];
+        childImages[0][0] = BitmapFactory.decodeResource(getResources(), R.drawable.white);
+        childImages[0][1] = BitmapFactory.decodeResource(getResources(), R.drawable.black);
+        childImages[0][2] = BitmapFactory.decodeResource(getResources(), R.drawable.yellow);
         childImages[1] = new Bitmap[5];
-        childImages[1][0]=BitmapFactory.decodeResource(getResources(),R.drawable.white);
-        childImages[1][2]=BitmapFactory.decodeResource(getResources(),R.drawable.fontred);
-        childImages[1][3]=BitmapFactory.decodeResource(getResources(),R.drawable.fontblue);
-        childImages[1][4]=BitmapFactory.decodeResource(getResources(),R.drawable.fontgreen);
+        childImages[1][0] = BitmapFactory.decodeResource(getResources(), R.drawable.white);
+        childImages[1][1] = BitmapFactory.decodeResource(getResources(), R.drawable.black);
+        childImages[1][2] = BitmapFactory.decodeResource(getResources(), R.drawable.fontred);
+        childImages[1][3] = BitmapFactory.decodeResource(getResources(), R.drawable.fontblue);
+        childImages[1][4] = BitmapFactory.decodeResource(getResources(), R.drawable.fontgreen);
 
     }
 
@@ -256,6 +331,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
 
@@ -301,9 +377,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
    void fontset(String fontset){
- toolbar=findViewById(R.id.toolbar);
-        toolbar.setTitle(fontset);
+ toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(fontset+"文字");
     }
 
-}
+
+
+
+    }
+
+
 

@@ -4,8 +4,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -215,9 +217,16 @@ public class fragmemo1 extends Fragment implements TextWatcher{
          }
 
       String fontset=String.valueOf(fontcount);
-               mainActivity.fontset(fontset);
+            mainActivity.fontset(fontset);
 
-}
+        getActivity().getFragmentManager().invalidateOptionsMenu();
+
+
+
+
+
+
+    }
 
     }
 
